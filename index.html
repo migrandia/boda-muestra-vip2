@@ -5,244 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestra Boda | Lucía & Alejandro</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <style>
         :root {
-            --dorado-suave: #bca080;
-            --crema-fondo: #fdfcf9;
-            --texto-oscuro: #333333;
-            --blanco: #ffffff;
-            --ancho-max: 480px;
+            --oro: #bca080;
+            --fondo: #fdfcf9;
+            --texto: #333333;
+            --ancho: 480px;
         }
 
-        body {
-            margin: 0; padding: 0;
-            background-color: #eee;
-            color: var(--texto-oscuro);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-            text-align: center;
-            overflow-x: hidden;
-        }
+        body { margin: 0; padding: 0; background-color: #111; color: var(--texto); font-family: 'Montserrat', sans-serif; text-align: center; overflow-x: hidden; }
 
-        .wrapper {
-            max-width: var(--ancho-max);
-            margin: 0 auto;
-            background-color: var(--blanco);
-            position: relative;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
+        .main-wrapper { max-width: var(--ancho); margin: 0 auto; background-color: var(--fondo); position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
 
-        /* === REPRODUCTOR === */
-        #music-box {
-            position: fixed; top: 20px; right: 20px; z-index: 1000;
-            background: rgba(255,255,255,0.7);
-            border: 1px solid var(--dorado-suave);
-            padding: 8px 15px; border-radius: 50px; cursor: pointer;
-            backdrop-filter: blur(3px); display: flex; align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        #m-icon { font-size: 1.1rem; color: var(--dorado-suave); margin-right: 6px; }
-        #m-text { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-oscuro); font-weight: bold; }
-
-        .img-full { width: 100%; height: auto; display: block; object-fit: cover; }
-
-        section {
-            padding: 60px 25px;
-            background-color: var(--crema-fondo);
-            border-bottom: 1px solid #f2ede4;
+        /* EFECTO PARALLAX (Imágenes fijas de fondo) */
+        .parallax {
+            height: 80vh;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
             position: relative;
         }
 
-        h1.nombres {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem; letter-spacing: 3px; color: var(--texto-oscuro);
-            margin: 0; font-weight: normal;
-        }
+        .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.2); }
 
-        .y-conector {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem; color: var(--dorado-suave);
-            display: block; margin: -15px 0;
-        }
+        section { padding: 80px 30px; position: relative; background: var(--fondo); }
 
-        .fecha-portada {
-            font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase;
-            color: var(--texto-oscuro); margin-top: 20px;
-        }
+        /* TIPOGRAFÍA */
+        h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; margin: 0; font-weight: 300; }
+        .conector { font-family: 'Great Vibes', cursive; font-size: 3.5rem; color: var(--oro); display: block; margin: -20px 0; }
+        h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-style: italic; font-weight: 400; }
 
-        .label-section {
-            font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
-            color: var(--dorado-suave); margin-bottom: 15px; font-weight: bold;
-        }
+        /* CONTADOR */
+        .timer { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
+        .t-item { background: white; padding: 15px; border-radius: 8px; min-width: 65px; border: 1px solid #eee; }
+        .t-num { font-size: 1.8rem; font-weight: bold; color: var(--oro); display: block; }
+        .t-lab { font-size: 0.6rem; letter-spacing: 1px; }
 
-        h2.serif-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic; font-size: 2.2rem; color: var(--texto-oscuro);
-            margin: 0 0 20px 0;
-        }
+        /* TARJETAS */
+        .card { background: white; padding: 35px 20px; border: 1px solid #f2ede4; margin-bottom: 30px; border-radius: 4px; }
+        .btn-link { display: inline-block; margin-top: 20px; padding: 15px 30px; border: 1px solid var(--oro); color: var(--oro); text-decoration: none; font-size: 0.7rem; font-weight: bold; letter-spacing: 2px; transition: 0.3s; }
+        .btn-link:hover { background: var(--oro); color: white; }
 
-        .linea-oro {
-            width: 60px; height: 1px; background-color: var(--dorado-suave);
-            margin: 40px auto;
-        }
+        /* ITINERARIO VISUAL */
+        .timeline { text-align: left; padding-left: 40px; border-left: 1px solid var(--oro); margin: 40px 20px; }
+        .time-step { position: relative; margin-bottom: 40px; }
+        .time-step::before { content: ''; position: absolute; left: -46px; top: 0; width: 10px; height: 10px; background: var(--oro); border-radius: 50%; }
+        .time-icon { font-size: 1.5rem; margin-right: 10px; vertical-align: middle; }
+        .time-hour { font-weight: bold; color: var(--oro); display: block; font-size: 0.8rem; margin-bottom: 5px; }
 
-        .card-evento {
-            background-color: var(--blanco); padding: 30px;
-            border-radius: 4px; border: 1px solid #f2ede4;
-            margin-bottom: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.02);
-        }
+        /* MESA DE REGALOS */
+        .gift-box { background: #f9f6f2; padding: 30px; border: 1px dashed var(--oro); border-radius: 8px; margin-top: 20px; }
 
-        .btn-lujo {
-            display: inline-block; margin-top: 20px; padding: 15px 30px;
-            background-color: var(--blanco); color: var(--dorado-suave);
-            text-decoration: none; font-size: 0.75rem; letter-spacing: 2px;
-            text-transform: uppercase; border: 1px solid var(--dorado-suave);
-            transition: 0.3s; font-weight: bold;
-        }
+        /* MUSICA */
+        #music-control { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 10px 15px; border-radius: 30px; border: 1px solid var(--oro); cursor: pointer; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
 
-        .btn-lujo:hover { background-color: var(--dorado-suave); color: white; }
-
-        /* === CONTADOR === */
-        .timer-container {
-            display: flex; justify-content: center; gap: 15px;
-            margin: 30px 0; padding: 20px 0;
-            border-top: 1px solid #f2ede4; border-bottom: 1px solid #f2ede4;
-        }
-        .t-val { display: block; font-size: 1.8rem; color: var(--dorado-suave); font-weight: bold; }
-        .t-lab { font-size: 0.65rem; text-transform: uppercase; opacity: 0.7; }
-
-        /* === MESA DE REGALOS & SOBRE === */
-        .gift-section { background-color: #f9f6f2; padding: 50px 25px; }
-        .gift-icon { font-size: 2.5rem; color: var(--dorado-suave); margin-bottom: 15px; }
-        .gift-card {
-            background: white; border: 1px dashed var(--dorado-suave);
-            padding: 25px; margin-bottom: 20px; border-radius: 8px;
-        }
-
-        /* === RSVP === */
-        .btn-rsvp {
-            display: inline-block; margin-top: 30px; padding: 20px 40px;
-            background-color: var(--texto-oscuro); color: white;
-            text-decoration: none; font-size: 0.85rem; letter-spacing: 2px;
-            text-transform: uppercase; width: 80%; font-weight: bold;
-        }
+        .btn-rsvp { display: block; background: #222; color: white; padding: 20px; text-decoration: none; font-weight: bold; letter-spacing: 2px; margin-top: 30px; }
     </style>
 </head>
 <body onclick="playMusic()">
 
-    <div id="music-box" onclick="toggleMusic()">
-        <span id="m-icon">▶</span>
-        <span id="m-text">MUSICA</span>
-    </div>
-    
-    <audio id="cancion" loop>
-        <source src="https://www.dropbox.com/scl/fi/80hypdxkg24wx6x7oael2/En-Tus-Manos-Se-or.mp3?rlkey=j4di62c9sgj4txgwbpikcngp3&raw=1" type="audio/mpeg">
-    </audio>
+    <div id="music-control" onclick="toggleMusic()">🎵 <span id="m-text">MUSICA</span></div>
+    <audio id="cancion" loop><source src="https://www.dropbox.com/scl/fi/80hypdxkg24wx6x7oael2/En-Tus-Manos-Se-or.mp3?rlkey=j4di62c9sgj4txgwbpikcngp3&raw=1" type="audio/mpeg"></audio>
 
-    <div class="wrapper">
+    <div class="main-wrapper">
         
-        <img src="https://www.dropbox.com/scl/fi/pd9mjnnpuz1awyw4memr7/novios-de-frente.jpg?rlkey=fzbs6iftt0125yat387uxnbei&raw=1" class="img-full">
+        <div class="parallax" style="background-image: url('https://www.dropbox.com/scl/fi/pd9mjnnpuz1awyw4memr7/novios-de-frente.jpg?rlkey=fzbs6iftt0125yat387uxnbei&raw=1'); height: 100vh;">
+            <div class="overlay"></div>
+            <div style="position: absolute; bottom: 10%; width: 100%; color: white;">
+                <p data-aos="fade-up">NUESTRA BODA</p>
+                <h1 data-aos="fade-up" data-aos-delay="200" style="color: white;">Lucía <span class="conector">&</span> Alejandro</h1>
+                <p data-aos="fade-up" data-aos-delay="400" style="letter-spacing: 5px; font-size: 0.8rem;">14 . MARZO . 2026</p>
+            </div>
+        </div>
 
         <section>
-            <p style="font-size: 0.75rem; letter-spacing: 4px; color: #888;">NUESTRA BODA</p>
-            <h1 class="nombres">Lucía <span class="y-conector">&</span> Alejandro</h1>
-            <p class="fecha-portada">14 . MARZO . 2026</p>
-        </section>
-
-        <section>
-            <p style="font-size: 0.7rem; letter-spacing: 3px; color: var(--dorado-suave);">FALTAN SÓLO</p>
-            <div class="timer-container">
-                <div class="t-block"><span class="t-val" id="d">00</span><span class="t-lab">Días</span></div>
-                <div class="t-block"><span class="t-val" id="h">00</span><span class="t-lab">Hrs</span></div>
-                <div class="t-block"><span class="t-val" id="m">00</span><span class="t-lab">Min</span></div>
-                <div class="t-block"><span class="t-val" id="s">00</span><span class="t-lab">Seg</span></div>
+            <h2 data-aos="fade-up">Faltan sólo...</h2>
+            <div class="timer" data-aos="zoom-in">
+                <div class="t-item"><span class="t-num" id="d">00</span><span class="t-lab">DÍAS</span></div>
+                <div class="t-item"><span class="t-num" id="h">00</span><span class="t-lab">HRS</span></div>
+                <div class="t-item"><span class="t-num" id="m">00</span><span class="t-lab">MIN</span></div>
+                <div class="t-item"><span class="t-num" id="s">00</span><span class="t-lab">SEG</span></div>
             </div>
         </section>
 
-        <img src="https://www.dropbox.com/scl/fi/yxcamxu6ark6qj5jf9da1/novios-corriendo.jpg?rlkey=wt1aapl5nh89afj7n53zou3qt&raw=1" class="img-full">
+        <div class="parallax" style="background-image: url('https://www.dropbox.com/scl/fi/yxcamxu6ark6qj5jf9da1/novios-corriendo.jpg?rlkey=wt1aapl5nh89afj7n53zou3qt&raw=1'); height: 60vh;"></div>
 
         <section>
-            <div class="card-evento">
-                <p class="label-section">Ceremonia Religiosa</p>
+            <div class="card" data-aos="fade-right">
+                <p style="color: var(--oro); font-weight: bold; letter-spacing: 2px;">CEREMONIA</p>
                 <h3>Parroquia del Prado</h3>
-                <p>17:00 Horas</p>
-                <a href="#" class="btn-lujo">Ver ubicación</a>
+                <p>17:00 HRS</p>
+                <a href="#" class="btn-link">VER MAPA</a>
             </div>
 
-            <div class="card-evento">
-                <p class="label-section">Recepción</p>
+            <div class="card" data-aos="fade-left">
+                <p style="color: var(--oro); font-weight: bold; letter-spacing: 2px;">RECEPCIÓN</p>
                 <h3>Hacienda San Ángel</h3>
-                <p>19:30 Horas</p>
-                <a href="#" class="btn-lujo">Ver ubicación</a>
+                <p>19:30 HRS</p>
+                <a href="#" class="btn-link">VER MAPA</a>
+            </div>
+        </section>
+
+        <section style="background: white;">
+            <h2 data-aos="fade-up">Itinerario</h2>
+            <div class="timeline" data-aos="fade-up">
+                <div class="time-step">
+                    <span class="time-hour">17:00 HRS</span>
+                    <p><span class="time-icon">⛪</span> Misa de Acción de Gracias</p>
+                </div>
+                <div class="time-step">
+                    <span class="time-hour">19:30 HRS</span>
+                    <p><span class="time-icon">🥂</span> Cóctel de Bienvenida</p>
+                </div>
+                <div class="time-step">
+                    <span class="time-hour">20:30 HRS</span>
+                    <p><span class="time-icon">🍽️</span> Cena de Gala</p>
+                </div>
+                <div class="time-step">
+                    <span class="time-hour">22:00 HRS</span>
+                    <p><span class="time-icon">💃</span> ¡A Bailar!</p>
+                </div>
             </div>
         </section>
 
         <section>
-            <p class="label-section">Sugerencia de Hospedaje</p>
-            <h2 class="serif-title">Hotel Sede</h2>
-            <p>Hemos seleccionado un hotel con tarifa preferencial para nuestros invitados.</p>
-            <a href="https://migrandia.github.io/Hoteles/"btn-lujo">Ver Información de Hotel</a>
+            <h2 data-aos="fade-up">¿Dónde hospedarse?</h2>
+            <p>Hemos reservado una tarifa especial para ti:</p>
+            <div class="card" data-aos="zoom-in" style="margin-top: 20px;">
+                <h3>Hotel St. Regis</h3>
+                <p>Código: BODA L&A</p>
+                <a href="https://migrandia.github.io/Hoteles/" class="btn-link">VER HOTELES</a>
+            </div>
         </section>
 
-        <img src="https://www.dropbox.com/scl/fi/snutqjlkrv7oglqswicq2/novios-besandoce.jpg?rlkey=ad7z44z08wgr0f4wcd20et7nz&raw=1" class="img-full">
+        <div class="parallax" style="background-image: url('https://www.dropbox.com/scl/fi/snutqjlkrv7oglqswicq2/novios-besandoce.jpg?rlkey=ad7z44z08wgr0f4wcd20et7nz&raw=1'); height: 70vh;"></div>
 
-        <section class="gift-section">
-            <h2 class="serif-title">Mesa de Regalos</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 30px;">Su presencia es nuestro mayor regalo, pero si desean tener un detalle con nosotros:</p>
+        <section>
+            <h2 data-aos="fade-up">Mesa de Regalos</h2>
             
-            <div class="gift-card">
-                <div class="gift-icon">🎁</div>
-                <p style="font-weight: bold; letter-spacing: 2px;">LIVERPOOL</p>
-                <p>Número de Evento: <strong>51234567</strong></p>
-                <a href="https://mesaderegalos.liverpool.com.mx/" target="_blank" class="btn-lujo" style="padding: 10px 20px; font-size: 0.6rem;">Ir a la Mesa</a>
+            <div class="gift-box" data-aos="fade-up">
+                <p style="font-size: 2rem;">🎁</p>
+                <p><strong>LIVERPOOL</strong></p>
+                <p>Evento: 51234567</p>
+                <a href="https://mesaderegalos.liverpool.com.mx/" target="_blank" class="btn-link">IR A LA MESA</a>
             </div>
 
-            <div class="gift-card">
-                <div class="gift-icon">✉️</div>
-                <p style="font-weight: bold; letter-spacing: 2px;">LLUVIA DE SOBRES</p>
-                <p style="font-size: 0.85rem;">Si lo prefieres, contaremos con una urna para sobres en la recepción del evento.</p>
+            <div class="gift-box" data-aos="fade-up" data-aos-delay="200">
+                <p style="font-size: 2rem;">✉️</p>
+                <p><strong>LLUVIA DE SOBRES</strong></p>
+                <p style="font-size: 0.8rem;">Si prefieres obsequio en efectivo, contaremos con un baúl en la recepción.</p>
             </div>
         </section>
 
-        <section style="padding: 100px 25px; background-color: var(--blanco); border: none;">
-            <h1 class="nombres" style="font-size: 2.5rem;">¡Te esperamos!</h1>
-            <div class="linea-oro"></div>
-            <p style="font-size: 0.9rem; color: #555; margin-bottom: 40px;">
-                "Tu presencia es el regalo más hermoso que podemos recibir."
-            </p>
-            <a href="https://wa.me/521234567890" class="btn-rsvp">CONFIRMAR ASISTENCIA</a>
+        <section style="background: white; padding-bottom: 100px;">
+            <h1 data-aos="fade-down">¡Te esperamos!</h1>
+            <p style="margin: 30px 0; font-style: italic;">"Tu presencia es nuestro mejor regalo."</p>
+            <a href="https://wa.me/521234567890" class="btn-rsvp" data-aos="zoom-in">CONFIRMAR ASISTENCIA</a>
         </section>
 
     </div>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
+        AOS.init({ duration: 1000, once: true });
+
         var audio = document.getElementById('cancion');
-        var mText = document.getElementById('m-text');
         var started = false;
+        function playMusic() { if(!started){ audio.play(); started=true; document.getElementById('m-text').innerText="PAUSA"; } }
+        function toggleMusic() { if(audio.paused){ audio.play(); document.getElementById('m-text').innerText="PAUSA"; } else { audio.pause(); document.getElementById('m-text').innerText="MUSICA"; } }
 
-        function playMusic() { if (!started) { audio.play().catch(e => console.log("Init...")); started = true; mText.innerText = "PAUSAR"; } }
-        function toggleMusic() {
-            started = true;
-            if (audio.paused) { audio.play(); mText.innerText = "PAUSAR"; } 
-            else { audio.pause(); mText.innerText = "MUSICA"; }
-        }
-
-        function timer() {
-            const dest = new Date("Mar 14, 2026 17:00:00").getTime();
+        function updateTimer() {
+            const end = new Date("Mar 14, 2026 17:00:00").getTime();
             const now = new Date().getTime();
-            const diff = dest - now;
-            if (diff > 0) {
-                document.getElementById('d').innerText = String(Math.floor(diff / (1000*60*60*24))).padStart(2, '0');
-                document.getElementById('h').innerText = String(Math.floor((diff % (1000*60*60*24)) / (1000*60*60))).padStart(2, '0');
-                document.getElementById('m').innerText = String(Math.floor((diff % (1000*60*60)) / (1000*60))).padStart(2, '0');
-                document.getElementById('s').innerText = String(Math.floor((diff % (1000*60)) / 1000)).padStart(2, '0');
+            const d = end - now;
+            if(d > 0){
+                document.getElementById('d').innerText = Math.floor(d/(1000*60*60*24));
+                document.getElementById('h').innerText = Math.floor((d%(1000*60*60*24))/(1000*60*60));
+                document.getElementById('m').innerText = Math.floor((d%(1000*60*60))/(1000*60));
+                document.getElementById('s').innerText = Math.floor((d%(1000*60))/1000);
             }
         }
-        timer(); setInterval(timer, 1000);
+        setInterval(updateTimer, 1000);
     </script>
 </body>
 </html>
