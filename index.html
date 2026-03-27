@@ -13,17 +13,18 @@
         :root {
             /* === PALETA DE COLORES EDITABLE === */
             --oro: #bca080;          /* Detalles, iconos, nombres */
-            --oro-brillo: #f9e29d;   /* Hover y acentos */
-            --fondo: #fdfcf9;        /* Fondo crema suave */
+            --oro-hover: #c5a059;    /* Color de fondo al pasar el cursor */
+            --crema-suave: #f9f6f2;  /* Color de fondo fijo para tarjetas */
+            --fondo-pagina: #fdfcf9; /* Fondo crema muy suave de la invitación */
             --texto: #333333;        /* Texto principal */
             --blanco: #ffffff;
             --oscuro: #1a1a1a;       /* Fondo RSVP */
             --ancho-max: 480px;      /* Ancho simulando móvil */
         }
 
-        body { margin: 0; padding: 0; background-color: #111; color: var(--texto); font-family: 'Montserrat', sans-serif; text-align: center; overflow-x: hidden; scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; background-color: #111; color: var(--texto); font-family: 'Montserrat', sans-serif; font-weight: 300; text-align: center; overflow-x: hidden; scroll-behavior: smooth; }
 
-        .main-wrapper { max-width: var(--ancho-max); margin: 0 auto; background-color: var(--fondo); position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+        .main-wrapper { max-width: var(--ancho-max); margin: 0 auto; background-color: var(--fondo-pagina); position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
 
         /* === EFECTO FOTO FIJA (PARALLAX) === */
         .parallax {
@@ -37,7 +38,7 @@
         .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.3); }
 
         /* === SECCIONES === */
-        section { padding: 80px 25px; position: relative; background: var(--fondo); border-bottom: 1px solid #f2ede4; }
+        section { padding: 80px 25px; position: relative; background: var(--fondo-pagina); border-bottom: 1px solid #f2ede4; }
         .white-section { background: var(--blanco); }
 
         /* === TIPOGRAFÍA DE GALA === */
@@ -47,31 +48,35 @@
         .subtitulo { font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--oro); font-weight: bold; margin-bottom: 30px; display: block; }
         .cita { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; line-height: 1.8; color: #555; max-width: 90%; margin: 0 auto; }
 
-        /* === CONTADOR (FIXED) === */
+        /* === CONTADOR === */
         .timer-gala { display: flex; justify-content: center; gap: 10px; margin: 40px 0; padding: 20px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
         .t-block { background: white; padding: 15px; border-radius: 8px; min-width: 65px; border: 1px solid #eee; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
         .t-num { font-size: 2rem; font-weight: bold; color: var(--oro); display: block; }
         .t-lab { font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; color: #777; }
 
-        /* === TARJETAS CON EFECTO DE COLOR (HOVER) === */
+        /* === TARJETAS CON COLOR FIJO Y EFECTO HOVER === */
         .card-gala {
-            background: white; padding: 40px 20px; border: 1px solid #f2ede4;
-            margin-bottom: 30px; border-radius: 4px; transition: 0.5s;
+            background-color: var(--crema-suave); /* FONDO FIJO AHORA */
+            padding: 40px 20px; border: 1px solid #f2ede4;
+            margin-bottom: 30px; border-radius: 4px; transition: 0.5s ease;
             position: relative; overflow: hidden;
         }
         /* Efecto de color al tocar/pasar mouse */
-        .card-gala:hover { background-color: #f9f6f2; border-color: var(--oro); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(188,160,128,0.1); }
+        .card-gala:hover { background-color: var(--oro-hover); border-color: var(--oro); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(188,160,128,0.2); }
+        
         .card-gala h3 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin: 10px 0; color: var(--texto); transition: 0.3s; }
-        .card-gala:hover h3 { color: var(--oro); }
+        /* El texto cambia a blanco en hover para contraste */
+        .card-gala:hover h3, .card-gala:hover p { color: white; }
 
-        /* Botones de Gala */
-        .btn-oro {
-            display: inline-block; margin-top: 25px; padding: 18px 35px;
+        /* Botones dorados minimalistas internos */
+        .btn-oro-interno {
+            display: inline-block; margin-top: 25px; padding: 15px 30px;
             border: 1px solid var(--oro); color: var(--oro);
-            text-decoration: none; font-size: 0.75rem; font-weight: bold;
+            text-decoration: none; font-size: 0.7rem; font-weight: bold;
             letter-spacing: 2px; text-transform: uppercase; transition: 0.3s;
+            background-color: var(--blanco);
         }
-        .btn-oro:hover { background: var(--oro); color: white; box-shadow: 0 5px 20px rgba(188,160,128,0.3); }
+        .card-gala:hover .btn-oro-interno { background-color: white; color: var(--oro-hover); border-color: white; }
 
         /* === PADRES & PADRINOS (GRID) === */
         .honor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; }
@@ -82,7 +87,7 @@
         /* === ITINERARIO VISUAL === */
         .timeline-gala { text-align: left; padding-left: 40px; border-left: 1px solid var(--oro); margin: 50px 20px; }
         .time-point { position: relative; margin-bottom: 40px; }
-        .time-point::before { content: ''; position: absolute; left: -46px; top: 0; width: 10px; height: 10px; background: var(--oro); border-radius: 50%; box-shadow: 0 0 10px var(--oro-brillo); }
+        .time-point::before { content: ''; position: absolute; left: -46px; top: 0; width: 10px; height: 10px; background: var(--oro); border-radius: 50%; box-shadow: 0 0 10px rgba(188,160,128,0.5); }
         .t-icon { font-size: 1.6rem; color: var(--oro); margin-right: 15px; vertical-align: middle; }
         .t-time { font-weight: bold; color: var(--oro); display: block; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 5px; }
 
@@ -92,17 +97,21 @@
         .dc-item { display: inline-block; margin: 10px 15px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #555; }
 
         /* === REGALOS & SOBRES === */
-        .gift-zone { background-color: #fcfaf8; padding: 60px 25px; border-radius: 8px; border: 1px dashed var(--oro); margin-top: 30px; transition: 0.3s; }
-        .gift-zone:hover { background-color: #f9f6f2; border-style: solid; }
-        .gift-icon { font-size: 2.5rem; color: var(--oro); margin-bottom: 15px; }
+        .gift-zone-card { background-color: var(--crema-suave); padding: 50px 25px; border-radius: 8px; border: 1px dashed var(--oro); margin-top: 30px; transition: 0.5s ease; text-align: center; }
+        .gift-zone-card:hover { background-color: var(--oro-hover); border-style: solid; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(188,160,128,0.2); }
+        .gift-icon { font-size: 2.5rem; color: var(--oro); margin-bottom: 15px; transition: 0.3s; }
+        .gift-zone-card:hover .gift-icon, .gift-zone-card:hover p, .gift-zone-card:hover strong { color: white; }
 
         /* === MUSICA FLOTANTE === */
         #music-pill { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 12px 20px; border-radius: 50px; border: 1px solid var(--oro); cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2); font-size: 10px; font-weight: bold; letter-spacing: 1px; backdrop-filter: blur(5px); }
 
-        /* === RSVP FINAL === */
-        .rsvp-gala { background-color: var(--oscuro); color: white; padding: 100px 25px; }
-        .btn-confirmar { display: block; background: var(--oro); color: white; padding: 20px; text-decoration: none; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-top: 40px; border-radius: 4px; transition: 0.3s; }
-        .btn-confirmar:hover { background: var(--oro-brillo); color: var(--oscuro); box-shadow: 0 5px 20px rgba(249,226,157,0.4); }
+        /* === RSVP FINAL (FONDO OSCURO) === */
+        .rsvp-gala { background-color: var(--oscuro); color: white; padding: 100px 25px; position: relative; }
+        .btn-confirmar { display: block; background: var(--oro); color: white; padding: 20px; text-decoration: none; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-top: 40px; border-radius: 4px; transition: 0.3s; border: 2px solid var(--oro); }
+        .btn-confirmar:hover { background: transparent; color: var(--oro); box-shadow: 0 5px 20px rgba(188,160,128,0.4); }
+
+        /* === FLORES DECORATIVAS (CORREGIDAS) === */
+        .floral-tribal { position: absolute; width: 120px; opacity: 0.15; z-index: 1; pointer-events: none; }
 
     </style>
 </head>
@@ -123,12 +132,12 @@
         </div>
 
         <section class="white-section">
-            <div class="floral-tribal" style="position: absolute; top:0; left:0; width:100px; opacity:0.1;"><img src="https://i.imgur.com/8QzQjC1.png" width="100%"></div>
+            <div class="floral-tribal" style="top:0; left:0;"><img src="https://i.ibb.co/dB3mS4v/floral-tribal-top-left.png" width="100%" alt="decoración floral"></div>
             <span class="subtitulo" data-aos="fade-up">Bienvenidos</span>
             <p class="cita" data-aos="fade-up" data-aos-delay="200">
                 "Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que amas los hace inolvidables. Gracias por ser parte de nuestra historia."
             </p>
-            <div class="linea-oro" data-aos="zoom-in"></div>
+            <div class="linea-oro" data-aos="zoom-in" style="width: 60px; height: 1px; background-color: var(--oro); margin: 40px auto;"></div>
         </section>
 
         <section>
@@ -150,12 +159,12 @@
             <h2 class="titulo-seccion" data-aos="fade-up">Nuestros Padres</h2>
             <div class="honor-grid" data-aos="fade-up">
                 <div class="honor-box">
-                    <p class="subtitulo" style="font-size: 0.6rem; color: #888;"> PADRES DE LA NOVIA </p>
+                    <p class="subtitulo" style="font-size: 0.6rem; color: #888; margin-bottom: 10px;"> PADRES DE LA NOVIA </p>
                     <p><strong>Roberto Martínez</strong></p>
                     <p><strong>Lucía Ferré</strong></p>
                 </div>
                 <div class="honor-box">
-                    <p class="subtitulo" style="font-size: 0.6rem; color: #888;"> PADRES DEL NOVIO </p>
+                    <p class="subtitulo" style="font-size: 0.6rem; color: #888; margin-bottom: 10px;"> PADRES DEL NOVIO </p>
                     <p><strong>Julián Soto</strong></p>
                     <p><strong>María Paz</strong></p>
                 </div>
@@ -166,21 +175,21 @@
             <span class="subtitulo" data-aos="fade-up">¿Cuándo & Dónde?</span>
             
             <div class="card-gala" data-aos="fade-right">
-                <p style="color: var(--oro); font-weight: bold; letter-spacing: 2px;">LA MISSA</p>
+                <p style="color: var(--oro); font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">La Misa</p>
                 <h3>Parroquia del Prado</h3>
                 <p>Centro Histórico, CDMX</p>
-                <div class="linea-oro" style="margin: 20px auto; width: 40px;"></div>
+                <div style="width: 40px; height: 1px; background-color: var(--oro); margin: 20px auto;"></div>
                 <p><strong>17:00 Horas</strong></p>
-                <a href="#" class="btn-oro">VER UBICACIÓN</a>
+                <a href="#" class="btn-oro-interno">VER UBICACIÓN</a>
             </div>
 
             <div class="card-gala" data-aos="fade-left">
-                <p style="color: var(--oro); font-weight: bold; letter-spacing: 2px;">LA RECEPCIÓN</p>
+                <p style="color: var(--oro); font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">La Recepción</p>
                 <h3>Salón Terraza Real</h3>
                 <p>Km 5 Carretera a la Playa</p>
-                <div class="linea-oro" style="margin: 20px auto; width: 40px;"></div>
+                <div style="width: 40px; height: 1px; background-color: var(--oro); margin: 20px auto;"></div>
                 <p><strong>19:30 Horas</strong></p>
-                <a href="#" class="btn-oro">VER UBICACIÓN</a>
+                <a href="#" class="btn-oro-interno">VER UBICACIÓN</a>
             </div>
         </section>
 
@@ -191,12 +200,12 @@
                 <div class="honor-box">
                     <p><strong>Carlos Martínez</strong></p>
                     <p><strong>Elena Guzmán</strong></p>
-                    <p style="font-size: 0.7rem; color: #888;">— VELACIÓN —</p>
+                    <p style="font-size: 0.7rem; color: #888; margin-top: 5px;">— VELACIÓN —</p>
                 </div>
                 <div class="honor-box">
                     <p><strong>Julián Soto Jr.</strong></p>
                     <p><strong>María Elena Paz</strong></p>
-                    <p style="font-size: 0.7rem; color: #888;">— ANILLOS —</p>
+                    <p style="font-size: 0.7rem; color: #888; margin-top: 5px;">— ANILLOS —</p>
                 </div>
             </div>
         </section>
@@ -246,9 +255,10 @@
             <span class="subtitulo" data-aos="fade-up">Alojamiento</span>
             <h2 class="titulo-seccion" data-aos="fade-up">Hoteles Sugeridos</h2>
             <p>Para tu comodidad, hemos seleccionado opciones de hospedaje.</p>
+            
             <div class="card-gala" data-aos="zoom-in" style="margin-top: 30px;">
                 <p>Revisa la lista de hoteles con tarifa especial:</p>
-                <a href="https://migrandia.github.io/Hoteles/" class="btn-oro">VER OPCIONES DE HOTEL</a>
+                <a href="https://migrandia.github.io/Hoteles/" class="btn-oro-interno">VER OPCIONES DE HOTEL</a>
             </div>
         </section>
 
@@ -256,26 +266,32 @@
             <span class="subtitulo" data-aos="fade-up">Detalles</span>
             <h2 class="titulo-seccion" data-aos="fade-up">Regalos</h2>
             
-            <div class="gift-zone" data-aos="fade-up">
+            <p style="font-size: 0.95rem; line-height: 1.8; color: #555; max-width: 90%; margin: 0 auto 40px auto;">
+                Su presencia es nuestro mejor regalo, pero si desean tener un detalle con nosotros:
+            </p>
+
+            <div class="gift-zone-card" data-aos="fade-up">
                 <div class="gift-icon">🎁</div>
                 <p><strong>LIVERPOOL</strong></p>
-                <p>Evento: <strong>51234567</strong></p>
-                <a href="https://mesaderegalos.liverpool.com.mx/" target="_blank" class="btn-oro">IR A LA MESA</a>
+                <p>Número de Evento: <strong>51234567</strong></p>
+                <a href="https://mesaderegalos.liverpool.com.mx/" target="_blank" class="btn-oro-interno" style="padding: 10px 20px; font-size: 0.6rem; margin-top: 15px;">IR A LA MESA</a>
             </div>
 
-            <div class="gift-zone" data-aos="fade-up" data-aos-delay="200" style="margin-top: 40px;">
+            <div class="gift-zone-card" data-aos="fade-up" data-aos-delay="200" style="margin-top: 40px;">
                 <div class="gift-icon">✉️</div>
                 <p><strong>LLUVIA DE SOBRES</strong></p>
-                <p style="font-size: 0.85rem; max-width: 80%; margin: 10px auto;">Si prefieres obsequio en efectivo, contaremos con un baúl en la entrada.</p>
+                <p style="font-size: 0.85rem; max-width: 85%; margin: 10px auto;">Contaremos con un baúl en la entrada de la recepción para sobres.</p>
             </div>
         </section>
 
         <section class="rsvp-gala">
-            <div class="floral-tribal" style="bottom:0; right:0; width:150px; opacity:0.1;"><img src="https://i.imgur.com/8QzQjC1.png" width="100%"></div>
+            <div class="floral-tribal" style="bottom:0; right:0; width:150px;"><img src="https://i.ibb.co/6y4XWjM/floral-tribal-bottom-right.png" width="100%" alt="decoración floral"></div>
+            
             <h1 data-aos="fade-down" class="nombres-premium" style="font-size: 3rem;">¡Acompáñanos!</h1>
             <p style="margin: 30px 0; font-style: italic; opacity: 0.8;">"Tu presencia hará nuestra noche inolvidable."</p>
             <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 20px;">Favor de confirmar antes del 10 de Noviembre.</p>
             <a href="https://wa.me/521234567890" class="btn-confirmar" data-aos="zoom-in">CONFIRMAR ASISTENCIA</a>
+            
             <p style="margin-top: 60px; font-family: 'Great Vibes'; font-size: 2.5rem; color: var(--oro);">¡Te Esperamos!</p>
         </section>
 
@@ -283,16 +299,16 @@
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Inicializar Animaciones
+        // Inicializar Animaciones al Bajar
         AOS.init({ duration: 1000, once: true });
 
-        // Lógica de Música
+        // Lógica de Música (Tocar en cualquier parte para iniciar)
         var audio = document.getElementById('cancion');
         var started = false;
-        function playMusic() { if(!started){ audio.play(); started=true; document.getElementById('m-text').innerText="PAUSA"; } }
+        function playMusic() { if(!started){ audio.play().catch(function(error) { console.log("Audio bloqueado"); }); started=true; document.getElementById('m-text').innerText="PAUSA"; } }
         function toggleMusic() { if(audio.paused){ audio.play(); document.getElementById('m-text').innerText="PAUSA"; } else { audio.pause(); document.getElementById('m-text').innerText="MUSICA"; } }
 
-        // Lógica del Contador (FECHA CORREGIDA: 10 DIC 2026)
+        // Lógica del Contador (FECHA: 10 DIC 2026)
         function updateTimer() {
             const fechaBoda = new Date("December 10, 2026 17:00:00").getTime();
             const ahora = new Date().getTime();
@@ -304,7 +320,6 @@
                 document.getElementById('m').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
                 document.getElementById('s').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
             } else {
-                // Si la fecha ya pasó
                 document.getElementById('d').innerText = "00";
                 document.getElementById('h').innerText = "00";
                 document.getElementById('m').innerText = "00";
